@@ -191,7 +191,7 @@ const DataSockHandler = struct {
                 self.partial.clearRetainingCapacity();
             } else {
                 const new_len = self.partial.items.len - processed;
-                std.mem.copy(u8, self.partial.items[0..new_len], self.partial.items[processed..]);
+                @memcpy(self.partial.items[0..new_len], self.partial.items[processed..]);
                 self.partial.items.len = new_len;
             }
         } else {

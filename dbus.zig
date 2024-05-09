@@ -34,8 +34,8 @@ pub const MessageType = enum(u8) {
 };
 
 const endian_header_value = switch (builtin.cpu.arch.endian()) {
-    .Big => 'B',
-    .Little => 'l',
+    .big => 'B',
+    .little => 'l',
 };
 
 pub fn writeIntNative(comptime T: type, buf: [*]u8, value: T) void {
@@ -379,8 +379,8 @@ pub const method_call_msg = struct {
 
 fn getEndian(first_msg_byte: u8) ?std.builtin.Endian {
     return switch (first_msg_byte) {
-        'l' => std.builtin.Endian.Little,
-        'B' => std.builtin.Endian.Big,
+        'l' => .little,
+        'B' => .big,
         else => null,
     };
 }
